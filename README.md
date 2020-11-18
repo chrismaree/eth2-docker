@@ -53,3 +53,13 @@ nodes using Prometheus and presents them in a browser-based Grafana GUI.
 5. Import some dashboards from the `dashboards` directory in this repo:
     - In the Grafana UI, go to `Dashboards` -> `Manage` -> `Import` -> `Upload .json file`.
     - The `Summary.json` dashboard is a good place to start.
+
+# Useful commands
+
+If you've cloned the repo to your home directory running then setting the following aliases in your `.zshrc` config can be useful:
+```
+alias infra-start="docker-compose -f ~/eth2-docker/infra-compose.yml up -d"
+alias infra-stop="docker-compose -f ~/eth2-docker/infra-compose.yml down"
+alias metrics-start="docker-compose -f ~/eth2-docker/metrics-compose.yml up -d"
+alias metrics-stop="docker-compose -f ~/eth2-docker/metrics-compose.yml down"
+```
