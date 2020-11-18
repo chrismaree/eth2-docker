@@ -10,14 +10,17 @@ services:
     image: alethio/eth2stats-client:latest
     command: eth2stats.node-name="SET-ME-TO-YOUR-NODE-NAME" --data.folder="/data" --eth2stats.addr="grpc.pyrmont.eth2.wtf:8080" --eth2stats.tls=false --beacon.type="v1" --beacon.addr="http://localhost:5052" --beacon.metrics-addr="http://localhost:5054/metrics"
     volumes:
-      - ./eth2stats-data:/data
+      - eth2stats-data:/data
     network_mode: host
   prometheus:
     container_name: prometheus
     build:
       context: prometheus
     volumes:
-      - ./scrape-targets:/prometheus/targets
+      - prometheus-data:/prometheus
+      - type: bind
+        source: ./scrape-targets
+        target: /prometheus/targets
     ports:
       - 9090:9090
     restart: always
@@ -46,8 +49,14 @@ services:
     build:
       context: grafana
     volumes:
-      - ./grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
     ports:
       - 3000:3000/tcp
     restart: always
     network_mode: host
+
+volumes:
+    eth2stats-data:
+    grafana-data:
+    prometheus-data:
+    targets:

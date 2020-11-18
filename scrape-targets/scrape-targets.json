@@ -6,5 +6,21 @@
     "targets": [
       "localhost:5054"
     ]
+  },
+  {
+    "labels": {
+      "job": "node_exporter"
+    },
+    "targets": [
+      "localhost:9100"
+    ]
+  },
+  {
+    "labels": {
+      "job": "node_exporter"
+    },
+    "targets": [
+      "localhost:8080"
+    ]
   }
 ]
