@@ -1,0 +1,46 @@
+#
+# Infrastructure services -- runs an ETH2 lighthouse beacon node, validator client and ETH1 Geth node.
+#
+version: "3.0"
+
+services:
+  beacon_node:
+    image: sigp/lighthouse:latest
+    container_name: beacon_node
+    volumes:
+      - ./lighthouse-data:/root/.lighthouse
+      - ./scripts:/root/scripts
+    ports:
+      - 5052:5052/tcp
+      - 5053:5053/tcp
+      - 5054:5054/tcp # metrics endpoint
+      - 9000:9000/tcp
+      - 9000:9000/udp
+    env_file: .env
+    command: sh /root/scripts/start-beacon-node.sh
+    restart: on-failure
+  validator_client:
+    image: sigp/lighthouse:latest
+    container_name: validator_client
+    volumes:
+      - ./lighthouse-data:/root/.lighthouse
+      - ./scripts:/root/scripts
+      - ./validator_keys:/root/validator_keys
+    depends_on:
+      - beacon_node
+    env_file: .env
+    command: sh /root/scripts/start-validator-client.sh
+    restart: on-failure
+  geth:
+    image: ethereum/client-go
+    container_name: geth
+    entrypoint: /bin/sh
+    volumes:
+      - ./geth-data:/root/.ethereum
+      - ./scripts:/root/scripts
+    ports:
+      - 30303:30303/tcp
+      - 30303:30303/udp
+    env_file: .env
+    command: /root/scripts/start-geth.sh
+    restart: on-failure
