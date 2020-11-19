@@ -18,7 +18,7 @@ services:
       - 9000:9000/udp
     env_file: .env
     command: sh /root/scripts/start-beacon-node.sh
-    restart: on-failure
+    restart: unless-stopped
   validator_client:
     image: sigp/lighthouse:latest
     container_name: validator_client
@@ -30,7 +30,7 @@ services:
       - beacon_node
     env_file: .env
     command: sh /root/scripts/start-validator-client.sh
-    restart: on-failure
+    restart: unless-stopped
   geth:
     image: ethereum/client-go
     container_name: geth
@@ -43,4 +43,4 @@ services:
       - 30303:30303/udp
     env_file: .env
     command: /root/scripts/start-geth.sh
-    restart: on-failure
+    restart: unless-stopped

@@ -6,7 +6,7 @@ version: "3.3"
 services:
   eth2stats:
     container_name: eth2stats
-    restart: always
+    restart: unless-stopped
     image: alethio/eth2stats-client:latest
     command: eth2stats.node-name="SET-ME-TO-YOUR-NODE-NAME" --data.folder="/data" --eth2stats.addr="grpc.pyrmont.eth2.wtf:8080" --eth2stats.tls=false --beacon.type="v1" --beacon.addr="http://localhost:5052" --beacon.metrics-addr="http://localhost:5054/metrics"
     volumes:
@@ -23,7 +23,7 @@ services:
         target: /prometheus/targets
     ports:
       - 9090:9090
-    restart: always
+    restart: unless-stopped
     network_mode: host
   node-exporter:
     image: prom/node-exporter
@@ -52,7 +52,7 @@ services:
       - grafana-data:/var/lib/grafana
     ports:
       - 3000:3000/tcp
-    restart: always
+    restart: unless-stopped
     network_mode: host
 
 volumes:

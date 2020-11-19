@@ -14,7 +14,7 @@ The following features are available:
 
 ## Usage
 
-`$ docker-compose up -f infra-compose.yml`
+`$ docker-compose up -f infra.yml`
 
 A `.lighthouse` directory will be created in the repository root which contains
 the validator keys, beacon node database and other Lighthouse files.
@@ -44,7 +44,7 @@ nodes using Prometheus and presents them in a browser-based Grafana GUI.
 ## Usage
 
 1. Start a Lighthouse docker from previous part of this README.
-2. Bring the environment up with `$ docker-compose up -f metrics-compose.yml`.
+2. Bring the environment up with `$ docker-compose up -f metrics.yml`.
 3. Ensure that Prometheus can access your Lighthouse node by ensuring it is in
    the `UP` state at [http://localhost:9090/targets](http://localhost:9090/targets).
 4. Browse to [http://localhost:3000](http://localhost:3000)
