@@ -17,7 +17,8 @@ WALLET_PASSFILE=$DATADIR/secrets/$WALLET_NAME.pass
 if [ "$START_VALIDATOR" != "" ]; then
 	if [ "$IMPORT_LAUNCHPAD_KEYSTORES" != "" ]; then
 		echo $LAUNCHPAD_KEYSTORE_PASSWD | lighthouse \
-			--testnet $TESTNET \
+			--delete-lockfiles \
+                        --testnet $TESTNET \
 			account validator import \
 			--directory /root/validator_keys \
 			--reuse-password \
@@ -29,6 +30,7 @@ if [ "$START_VALIDATOR" != "" ]; then
 
 		if [ ! -d $DATADIR/wallets ]; then
 			lighthouse \
+                                --delete-lockfiles \
 				--debug-level $DEBUG_LEVEL \
 				--testnet $TESTNET \
 				account \
@@ -40,8 +42,9 @@ if [ "$START_VALIDATOR" != "" ]; then
 			echo "Wallet directory already exists. Will not create wallet."
 		fi
 
-		lighthouse \
-			--debug-level $DEBUG_LEVEL \
+		lighthouse
+                        --delete-lockfiles \
+                        --debug-level $DEBUG_LEVEL \
 			--testnet $TESTNET \
 			account \
 			validator \
@@ -52,6 +55,7 @@ if [ "$START_VALIDATOR" != "" ]; then
 	fi
 
 	exec lighthouse \
+                --delete-lockfiles \
 		--debug-level $DEBUG_LEVEL \
 		--testnet $TESTNET \
 		validator \
