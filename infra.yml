@@ -1,11 +1,18 @@
 #
 # Infrastructure services -- runs an ETH2 lighthouse beacon node, validator client and ETH1 Geth node.
 #
-version: "3.0"
+version: "3.7"
+
+x-logging: &logging
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "100m"
 
 services:
   beacon_node:
-    image: sigp/lighthouse:latest
+    image: sigp/lighthouse:v1.0.0
     container_name: beacon_node
     volumes:
       - ./lighthouse-data:/root/.lighthouse
@@ -19,8 +26,9 @@ services:
     env_file: .env
     command: sh /root/scripts/start-beacon-node.sh
     restart: unless-stopped
+    <<: *logging
   validator_client:
-    image: sigp/lighthouse:latest
+    image: sigp/lighthouse:v1.0.0
     container_name: validator_client
     volumes:
       - ./lighthouse-data:/root/.lighthouse
@@ -31,6 +39,7 @@ services:
     env_file: .env
     command: sh /root/scripts/start-validator-client.sh
     restart: unless-stopped
+    <<: *logging
   geth:
     image: ethereum/client-go
     container_name: geth
@@ -44,3 +53,4 @@ services:
     env_file: .env
     command: /root/scripts/start-geth.sh
     restart: unless-stopped
+    <<: *logging
