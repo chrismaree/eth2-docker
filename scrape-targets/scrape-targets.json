@@ -1,10 +1,18 @@
 [
   {
     "labels": {
-      "job": "nodes"
+      "job": "beacon_node"
     },
     "targets": [
       "localhost:5054"
+    ]
+  },
+  {
+    "labels": {
+      "job": "validator_client"
+    },
+   "targets": [
+    "localhost:5064"
     ]
   },
   {

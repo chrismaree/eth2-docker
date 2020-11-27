@@ -8,7 +8,6 @@ if [ "$START_VALIDATOR" != "" ]; then
 	ETH1_FLAG=--eth1
 fi
 
-
 if [ "$NETWORK" = "" ]; then
 	NETWORK=$DEFAULT_NETWORK
 fi
@@ -20,6 +19,7 @@ fi
 if [ "$GRAFFITI" != "" ]; then
 	GRAFFITI_PARAM="--graffiti $GRAFFITI"
 fi
+
 
 exec lighthouse \
 	--debug-level $DEBUG_LEVEL \

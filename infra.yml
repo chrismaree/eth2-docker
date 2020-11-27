@@ -12,7 +12,7 @@ x-logging: &logging
 
 services:
   beacon_node:
-    image: sigp/lighthouse:v1.0.0
+    image: sigp/lighthouse:v1.0.1
     container_name: beacon_node
     volumes:
       - ./lighthouse-data:/root/.lighthouse
@@ -28,12 +28,14 @@ services:
     restart: unless-stopped
     <<: *logging
   validator_client:
-    image: sigp/lighthouse:v1.0.0
+    image: sigp/lighthouse:v1.0.1
     container_name: validator_client
     volumes:
       - ./lighthouse-data:/root/.lighthouse
       - ./scripts:/root/scripts
       - ./validator_keys:/root/validator_keys
+    ports:
+      - 5064:5064/tcp # metrics endpoint
     depends_on:
       - beacon_node
     env_file: .env
@@ -41,13 +43,17 @@ services:
     restart: unless-stopped
     <<: *logging
   geth:
-    image: ethereum/client-go
+    image: ethereum/client-go:v1.9.24
     container_name: geth
     entrypoint: /bin/sh
     volumes:
       - ./geth-data:/root/.ethereum
       - ./scripts:/root/scripts
     ports:
+      - 8545:8545/tcp
+      - 8545:8545/udp
+      - 8546:8546/tcp
+      - 8546:8546/udp
       - 30303:30303/tcp
       - 30303:30303/udp
     env_file: .env
