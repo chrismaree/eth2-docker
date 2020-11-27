@@ -1,7 +1,7 @@
 #
 # Metrics services -- provides a web GUI to monitor Lighthouse nodes & docker host machine
 #
-version: "3.3"
+version: "2"
 
 services:
   eth2stats:

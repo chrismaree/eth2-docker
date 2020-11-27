@@ -1,7 +1,7 @@
 #
 # Infrastructure services -- runs an ETH2 lighthouse beacon node, validator client and ETH1 Geth node.
 #
-version: "3.7"
+version: "2"
 
 x-logging: &logging
   logging:
