@@ -1,14 +1,14 @@
 #
 # Metrics services -- provides a web GUI to monitor Lighthouse nodes & docker host machine
 #
-version: "2"
+version: "3.8"
 
 services:
   eth2stats:
     container_name: eth2stats
     restart: unless-stopped
     image: alethio/eth2stats-client:latest
-    command: eth2stats.node-name="SET-ME-TO-YOUR-NODE-NAME" --data.folder="/data" --eth2stats.addr="grpc.pyrmont.eth2.wtf:8080" --eth2stats.tls=false --beacon.type="v1" --beacon.addr="http://localhost:5052" --beacon.metrics-addr="http://localhost:5054/metrics"
+    command: run --eth2stats.node-name="zoin-node" --data.folder="/data" --eth2stats.addr="grpc.pyrmont.eth2.wtf:8080" --eth2stats.tls=false --beacon.type="v1" --beacon.addr="http://localhost:5052" --beacon.metrics-addr="http://localhost:5054/metrics"
     volumes:
       - eth2stats-data:/data
     network_mode: host
