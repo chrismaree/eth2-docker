@@ -2,6 +2,17 @@
 
 This repo is adapted from the official [lighthouse-docker](https://github.com/sigp/lighthouse-docker) & [lighthouse-metrics](https://github.com/sigp/lighthouse-metrics) to be combine into one repo containing a few extra services, dashboards & customizations.
 
+# Quick start:
+1. Generate your validator keys from the launchpad CLI
+2. Place your validator keys in `validator_keys` directory.
+3. Copy the sample env file and populate it with your info. `cp default.env .env`.
+4. Run `docker-compose -f create-account.yaml run validator-import-launchpad` to import your validator keys into lighthouse. You will be prompted for your password you used during the CLI process.
+5. Run `docker-compose -f infra.yml up -d` to start up your validator client, beacon node and geth.
+6. Run `docker ps -a` to check the status of the containers. Verify all logs look normal.
+7. Run `docker-compose -f metrics.yml up -d` to start the monitoring stack.
+8. Run `docker ps -a` to check the status of the containers. Verify all logs look normal.
+9. Profit 🤑
+
 # Lighthouse Docker
 
 Provides a `docker-compose` environment for running Lighthouse.
