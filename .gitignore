@@ -4,5 +4,6 @@ geth-data/
 lighthouse-data/
 validator_keys/
 medalla_keys/
+pyrmont_keys/
 .env
 

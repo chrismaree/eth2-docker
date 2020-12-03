@@ -12,7 +12,7 @@
       "job": "validator_client"
     },
    "targets": [
-    "localhost:5064"
+     "localhost:5064"
     ]
   },
   {

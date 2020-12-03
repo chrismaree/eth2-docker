@@ -2,7 +2,8 @@ version: "3.7"
 services:
   validator-import-launchpad:
     image: sigp/lighthouse:v1.0.1
-    command: lighthouse --network pyrmont account validator import --reuse-password --directory /validator_keys
+    container_name: validator-importer
+    command: lighthouse --network mainnet account validator import --reuse-password --directory /validator_keys
     volumes:
       - ./lighthouse-data:/root/.lighthouse
       - ./validator_keys:/validator_keys

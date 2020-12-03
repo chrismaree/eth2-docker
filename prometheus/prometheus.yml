@@ -1,12 +1,18 @@
 global:
     scrape_interval: 15s
-
     external_labels:
-        monitor: 'lighthouse-docker'
+        monitor: 'staking-nuc'
 
 scrape_configs:
-    - job_name: 'local-lighthouse'
+    - job_name: 'local-targets'
       scrape_interval: 5s
       file_sd_configs:
           - files:
               - '/prometheus/targets/scrape-targets.json'
+
+    - job_name: 'geth-node'
+      metrics_path: /debug/metrics/prometheus
+      scrape_interval: 5s
+      static_configs:
+        - targets: 
+          - localhost:6060
