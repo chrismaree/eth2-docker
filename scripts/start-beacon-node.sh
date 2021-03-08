@@ -13,7 +13,7 @@ if [ "$NETWORK" = "" ]; then
 fi
 
 if [ "$ENABLE_METRICS" != "" ]; then
-	METRICS_PARAMS="--metrics --metrics-address 0.0.0.0 "
+	METRICS_PARAMS="--metrics --metrics-address 0.0.0.0  --validator-monitor-auto"
 fi
 
 if [ "$GRAFFITI" != "" ]; then
