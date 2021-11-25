@@ -46,7 +46,7 @@ services:
     container_name: geth
     entrypoint: /bin/sh
     volumes:
-      - ./geth-data:/root/.ethereum
+      - /mnt/external1/geth-data/:/root/.ethereum
       - ./scripts:/root/scripts
     ports:
       - 6060:6060
