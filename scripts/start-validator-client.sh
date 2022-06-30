@@ -11,11 +11,17 @@ if [ "$ENABLE_METRICS" != "" ]; then
 	METRICS_PARAMS="--metrics --metrics-address 0.0.0.0 "
 fi
 
+if [ "$ENABLE_DOPPELGANGER_PROTECTION" != "" ]; then
+  DOPPELGANGER_PROTECTION="--enable-doppelganger-protection "
+fi
+
 if [ "$START_VALIDATOR" != "" ]; then
 	exec lighthouse \
-		--debug-level $DEBUG_LEVEL \
-		--network $NETWORK \
-		validator \
-                $METRICS_PARAMS \
-		--beacon-node http://beacon_node:5052
+	--debug-level $DEBUG_LEVEL \
+	--network $NETWORK \
+	validator \
+        $METRICS_PARAMS \
+	--beacon-node http://beacon_node:5052 \
+	$DOPPELGANGER_PROTECTION
+
 fi
