@@ -1,6 +1,6 @@
 # Simple ETH2 docker-compose configs
 
-This repo is adapted from the official [lighthouse-docker](https://github.com/sigp/lighthouse-docker) & [lighthouse-metrics](https://github.com/sigp/lighthouse-metrics) to be combine into one repo containing a few extra services, dashboards & customizations.
+This repo is adapted from the official [lighthouse-docker](https://github.com/sigp/lighthouse-docker) & [lighthouse-metrics](https://github.com/sigp/lighthouse-metrics) to be combine into one repo containing a few extra services, dashboards & customizations. It is meant to be an ultra light weight alternative to things like [eth-docker](https://eth-docker.net/docs/Support/GethPrune) which require a LOT of configs, settings and has a lot of bloat.
 
 # Quick start:
 1. Generate your validator keys from the launchpad CLI
